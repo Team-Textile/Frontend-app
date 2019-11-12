@@ -62,6 +62,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 30,
+  },
+  input: {
+    height: 30,
+    width: '85%',
+    borderWidth: 2,
+    borderColor: '#DDDDDD',
+    borderRadius: 5,
+    margin: 20,
   }
 })
 

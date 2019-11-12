@@ -20,7 +20,7 @@ class IdentityScreen extends React.Component{
         <View style={styles.buttonContainer}>
           <Text style={styles.plaintext}>Try to survive the Werewolf attacks.</Text>
         </View>
-        <Link to='/' ><Text>TEMP</Text></Link>
+        <Link to='/night' ><Text>TEMP</Text></Link>
       </View>
     )
   }
