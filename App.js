@@ -5,6 +5,9 @@ import { NativeRouter, Route } from "react-router-native";
 import Home from './containers/Home'
 import IdentityScreen from './containers/IdentityScreen'
 import NightScreen from './containers/NightScreen'
+import CreateGame from './containers/CreateGame';
+
+
 
 export default function App() {
   return (
@@ -12,6 +15,7 @@ export default function App() {
       <View style={styles.container}>
         <Route exact path='/' component={Home} />
         <Route exact path='/identity' component={IdentityScreen} />
+        <Route exact path='/create' component={CreateGame} />
         <Route exact path='/Night' component={NightScreen} />
       </View>
     </NativeRouter>
