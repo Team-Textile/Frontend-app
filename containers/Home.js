@@ -20,6 +20,11 @@ class Home extends React.Component {
     }
   }
 
+  handlePress() {
+    this.props.updateUsername(this.state.username)
+    this.setState({usernameConfirmed: true})
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -28,10 +33,10 @@ class Home extends React.Component {
         <View style={styles.buttonContainer}>
           {this.state.usernameConfirmed ?<>
             <Link style={styles.button} to="/create"><Text style={styles.buttonText}>Host a Game</Text></Link>
-            <Link style={styles.button} to="/" ><Text style={styles.buttonText}>Join a Game</Text></Link>
+            <Link style={styles.button} to="/join" ><Text style={styles.buttonText}>Join a Game</Text></Link>
               </>:<>
             <TextInput placeholder="Username" style={styles.input} value={this.state.username} onChangeText={username => this.setState({ username })} />
-            <Button onPress={() => this.setState({ usernameConfirmed: true })} title="Confirm Username" />
+            <Button onPress={() => this.handlePress()} title="Confirm Username" />
               </>}
         </View>
       </View>

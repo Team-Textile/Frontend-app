@@ -6,7 +6,7 @@ import styles from './Styles'
 
 import { Redirect } from 'react-router-native'
 
-class CreateGame extends Component {
+class JoinGame extends Component {
   constructor(props) {
     super(props)
 
@@ -17,8 +17,6 @@ class CreateGame extends Component {
   }
 
   handleSubmit() {
-    this.socket.emit("create lobby", this.state.title, this.props.username)
-    // this.props.updateLobbyId(this.state.title)
     this.setState({redirected: true})
   }
 
@@ -32,12 +30,12 @@ class CreateGame extends Component {
     return (
      <View style={styles.container}>
        {redirected && <Redirect to={`/idle/${title}/${this.props.username}`} />}
-       <Text style={styles.header}>Create Game!</Text>
+       <Text style={styles.header}>Join Game!</Text>
        <TextInput style={styles.input} placeholder="Game Title!" value={title} onChangeText={title => this.setState({title})} />
-       <Button title="Create Lobby!" onPress={() => this.handleSubmit()}/>
+       <Button title="Join Lobby!" onPress={() => this.handleSubmit()}/>
      </View>
     )
   }
 }
 
-export default CreateGame
+export default JoinGame
