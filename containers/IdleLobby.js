@@ -4,6 +4,8 @@ import styles from './Styles'
 
 import { View, Text, FlatList, Button } from 'react-native'
 
+import { Redirect } from 'react-router-native'
+
 class IdleLobby extends Component {
   constructor(props) {
     super(props)
@@ -12,7 +14,8 @@ class IdleLobby extends Component {
       lobbyId,
       username,
       players: [],
-      owner: false
+      owner: false,
+      redirect: false,
     }
   }
 
@@ -21,6 +24,7 @@ class IdleLobby extends Component {
     this.socket = openSocket("http://10.0.0.100:4000/")
     this.socket.emit("join lobby", lobbyId, username)
     this.handleJoin()
+    this.handleIdentity()
   }
 
   handleJoin() {
@@ -30,16 +34,31 @@ class IdleLobby extends Component {
     })
   }
 
+  handleIdentity() {
+    this.socket.on("show identity", () => {
+      console.log("Redirect")
+      this.setState({redirect: true})
+    })
+  }
+
+  startGame() {
+    const { lobbyId, } = this.state
+    this.socket.emit("start game", (lobbyId))
+  }
+
   render() {
+    const {username, lobbyId, redirect} = this.state
+
     return (
       <View style={styles.container}>
+        {redirect && <Redirect to={`/identity/${lobbyId}/${username}`} />}
         <Text style={styles.header}>Players!</Text>
         <FlatList 
         data={this.state.players}
         renderItem={({item}) => <Text>{item.username}</Text>}
         keyExtractor={item => `${item.username}-${item.roll}`}
         />
-      {this.state.owner && <Button title="Start!" onPress={console.log("Woo")}/>}
+      {this.state.owner && <Button title="Start!" onPress={() => this.startGame()}/>}
       </View>
     )
   }

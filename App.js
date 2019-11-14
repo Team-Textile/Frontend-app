@@ -20,7 +20,7 @@ export default function App() {
       <View style={styles.container}>
         <Route exact path='/' render={() => <Home updateUsername={updateUsername} />} />
         <Route exact path='/idle/:lobbyId/:username' component={IdleLobby} />
-        <Route exact path='/identity' component={IdentityScreen} />
+        <Route exact path='/identity/:lobbyId/:username' component={IdentityScreen} />
         <Route exact path='/create' render={() => <CreateGame username={username}  /> } />
         <Route exact path='/join' render={() => <JoinGame username={username}  /> } />
         <Route exact path='/Night' component={NightScreen} />
