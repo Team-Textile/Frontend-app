@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import openSocket from "socket.io-client"
 
+import env from "../.env"
+
 import { View, Text, Button, TextInput } from 'react-native'
 import styles from './Styles'
 
@@ -23,7 +25,7 @@ class CreateGame extends Component {
   }
 
   componentDidMount() {
-    this.socket = openSocket("http://10.0.0.100:4000/")
+    this.socket = openSocket(env.BACKEND_CONNECTION)
   }
 
 

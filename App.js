@@ -23,7 +23,7 @@ export default function App() {
         <Route exact path='/identity/:lobbyId/:username' component={IdentityScreen} />
         <Route exact path='/create' render={() => <CreateGame username={username}  /> } />
         <Route exact path='/join' render={() => <JoinGame username={username}  /> } />
-        <Route exact path='/Night' component={NightScreen} />
+        <Route exact path='/night/:lobbyId/:username' component={NightScreen} />
       </View>
     </NativeRouter>
   );

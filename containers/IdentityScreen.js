@@ -7,6 +7,9 @@ import {
   Image,
 } from 'react-native'
 
+import env from "../.env"
+
+
 import { Link } from "react-router-native"
 
 class IdentityScreen extends React.Component {
@@ -23,7 +26,7 @@ class IdentityScreen extends React.Component {
 
   componentDidMount() {
     const {lobbyId, username} = this.state
-    this.socket = openSocket("http://10.0.0.100:4000/")
+    this.socket = openSocket(env.BACKEND_CONNECTION)
     this.socket.emit("check identity", lobbyId, username)
     this.handleIdentity()
   }
@@ -36,16 +39,16 @@ class IdentityScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ ...styles.container, backgroundColor: '#ADE2FF' }}>
+      <View style={{ ...styles.container, backgroundColor: this.state.identity==='wolf'? "#FEBEBE": '#ADE2FF' }}>
         <View>
           <Text style={styles.header}>You are a</Text>
-          <Text style={styles.role}>{this.state.identity}</Text>
+          <Text style={{...styles.role, color: this.state.identity==='wolf'? "#B20000": '#002BC5'}}>{this.state.identity === "wolf"? "WereWolf" : "Villager"}</Text>
         </View>
         <Image source={require('../images/wolf.png')} style={{ width: 250, height: 250, marginTop: 20 }} />
         <View style={styles.buttonContainer}>
-          <Text style={styles.plaintext}>Try to survive the Werewolf attacks.</Text>
+          <Text style={styles.plaintext}>{this.state.identity === "wolf"? "Try to Kill All the Villagers": "Try to survive the Werewolf attacks."}</Text>
         </View>
-        <Link to='/night' ><Text>TEMP</Text></Link>
+        <Link to={`/night/${this.state.lobbyId}/${this.state.username}`} ><Text>Continue</Text></Link>
       </View>
     )
   }

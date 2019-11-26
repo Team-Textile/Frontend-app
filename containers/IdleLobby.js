@@ -2,6 +2,8 @@ import openSocket from "socket.io-client"
 import React, { Component } from 'react'
 import styles from './Styles'
 
+import env from "../.env"
+
 import { View, Text, FlatList, Button } from 'react-native'
 
 import { Redirect } from 'react-router-native'
@@ -21,7 +23,7 @@ class IdleLobby extends Component {
 
   componentDidMount() {
     const {username, lobbyId} = this.state
-    this.socket = openSocket("http://10.0.0.100:4000/")
+    this.socket = openSocket(env.BACKEND_CONNECTION)
     this.socket.emit("join lobby", lobbyId, username)
     this.handleJoin()
     this.handleIdentity()
