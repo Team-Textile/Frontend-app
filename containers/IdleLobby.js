@@ -2,7 +2,7 @@ import openSocket from "socket.io-client"
 import React, { Component } from 'react'
 import styles from './Styles'
 
-import env from "../.env"
+import env from "../env"
 
 import { View, Text, FlatList, Button } from 'react-native'
 

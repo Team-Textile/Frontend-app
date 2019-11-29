@@ -7,7 +7,7 @@ import {
   Image,
 } from 'react-native'
 
-import env from "../.env"
+import env from "../env"
 
 
 import { Link } from "react-router-native"

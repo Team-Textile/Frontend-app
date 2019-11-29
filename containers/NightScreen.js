@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import env from "../.env"
+import env from "../env"
 
 
 class NightScreen extends React.Component {

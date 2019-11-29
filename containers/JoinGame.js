@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import openSocket from "socket.io-client"
 
-import env from "../.env"
+import env from "../env"
 
 import { View, Text, Button, TextInput } from 'react-native'
 import styles from './Styles'
