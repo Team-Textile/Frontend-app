@@ -32,8 +32,8 @@ class IdentityScreen extends React.Component {
   }
 
   handleIdentity() {
-    this.socket.on("give identity", identity => {
-      this.setState({ identity })
+    this.socket.on("give identity", user => {
+      this.setState({ identity: user.roll })
     })
   }
 

@@ -38,7 +38,6 @@ class IdleLobby extends Component {
 
   handleIdentity() {
     this.socket.on("show identity", () => {
-      console.log("Redirect")
       this.setState({redirect: true})
     })
   }

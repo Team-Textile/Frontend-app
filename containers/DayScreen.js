@@ -24,7 +24,7 @@ class NightScreen extends React.Component {
       identity: '',
       redirect: false,
       players: [],
-      dead: false
+      dead: false,
     }
   }
 
@@ -42,22 +42,21 @@ class NightScreen extends React.Component {
       if(!player.alive) {
         this.setState({dead: true})
       }
-      if (player.roll === "wolf") {
-        this.socket.emit("get players", this.state.lobbyId)
-      }
+      this.socket.emit("get players", this.state.lobbyId)
       this.setState({ identity: player.roll })
     })
   }
 
   handlePlayers() {
     this.socket.on('give players', (players) => {
+      console.log(players)
       this.setState({ players })
     })
   }
 
   handleTimeshift() {
     this.socket.on("update time", (time) => {
-      if (time === "day") {
+      if (time === "night") {
         this.setState({ redirect: true })
       }
     })
@@ -79,14 +78,13 @@ class NightScreen extends React.Component {
   }
 
   render() {
-    const { lobbyId, username, redirect } = this.state
     return (
-      <View style={{ ...styles.container, backgroundColor: '#434EB1' }}>
-        {this.state.redirect && <Redirect to={`/day/${lobbyId}/${username}`} />}
-        {this.state.dead && <Redirect to={`/hung`} />}
-        <Image source={require('../images/moon.png')} style={{ width: 250, height: 250, marginTop: 20 }} />
+      <View style={{ ...styles.container, backgroundColor: '#6599FE' }}>
+        {this.state.redirect && <Redirect to={`/night/${this.state.lobbyId}/${this.state.username}`} />}
+        {this.state.dead && <Redirect to={`/eaten`} />}
+        <Image source={require('../images/sun.png')} style={{ width: 250, height: 250, marginTop: 20 }} />
         <View style={styles.voteButtonContainer}>
-          {this.state.players.filter(player => !(player.username === this.state.username || player.roll == "wolf")).map(player => this.renderPlayer(player.username))}
+          {this.state.players.filter(player => player.username !== this.state.username).map(player => this.renderPlayer(player.username))}
         </View>
       </View>
     )
