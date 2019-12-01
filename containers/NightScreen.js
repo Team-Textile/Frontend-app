@@ -24,7 +24,9 @@ class NightScreen extends React.Component {
       identity: '',
       redirect: false,
       players: [],
-      dead: false
+      dead: false,
+      win: false,
+      loss: false,
     }
   }
 
@@ -35,9 +37,33 @@ class NightScreen extends React.Component {
     this.handleIdentity()
     this.handlePlayers()
     this.handleTimeshift()
+    this.handleWin()
+  }
+
+  handleWin() {
+    this.socket.on("wolves win", (identity) => {
+      console.log("w", identity)
+      if (identity === "wolf") {
+        this.setState({win: true})
+      }
+      else {
+        this.setState({loss: true})
+      }
+    })
+
+    this.socket.on("villagers win", (identity) => {
+      console.log("v", identity)
+      if (identity === "wolf") {
+        this.setState({loss: true})
+      }
+      else {
+        this.setState({win: true})
+      }
+    })
   }
 
   handleIdentity() {
+    const { lobbyId, username } = this.state
     this.socket.on("give identity", player => {
       if(!player.alive) {
         this.setState({dead: true})
@@ -47,6 +73,7 @@ class NightScreen extends React.Component {
       }
       this.setState({ identity: player.roll })
     })
+    this.socket.emit("check win", lobbyId, username)
   }
 
   handlePlayers() {
@@ -84,6 +111,8 @@ class NightScreen extends React.Component {
       <View style={{ ...styles.container, backgroundColor: '#434EB1' }}>
         {this.state.redirect && <Redirect to={`/day/${lobbyId}/${username}`} />}
         {this.state.dead && <Redirect to={`/hung`} />}
+        {this.state.win && <Redirect to={`/win`} />}
+        {this.state.loss && <Redirect to={`/loss`} />}
         <Image source={require('../images/moon.png')} style={{ width: 250, height: 250, marginTop: 20 }} />
         <View style={styles.voteButtonContainer}>
           {this.state.players.filter(player => !(player.username === this.state.username || player.roll == "wolf")).map(player => this.renderPlayer(player.username))}
