@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Route, BackButton } from "react-router-native";
+import { NativeRouter, Route, BackButton, } from "react-router-native";
 
 import Home from './containers/Home'
 import IdentityScreen from './containers/IdentityScreen'
@@ -22,7 +22,7 @@ export default function App() {
     <NativeRouter>
       <View style={styles.container}>
         <BackButton />
-        <Route exact path='/' render={() => <Home updateUsername={updateUsername} />} />
+        <Route exact path='/' render={() => <Home updateUsername={updateUsername} username={username} />} />
         <Route exact path='/idle/:lobbyId/:username' component={IdleLobby} />
         <Route exact path='/identity/:lobbyId/:username' component={IdentityScreen} />
         <Route exact path='/create' render={() => <CreateGame username={username}  /> } />

@@ -5,12 +5,13 @@ import {
   View,
   Text,
   Image,
+  Button,
 } from 'react-native'
 
 import env from "../env"
 
 
-import { Link } from "react-router-native"
+import { Link, Redirect } from "react-router-native"
 
 class IdentityScreen extends React.Component {
   constructor(props) {
@@ -37,9 +38,12 @@ class IdentityScreen extends React.Component {
     })
   }
 
+  
+
   render() {
     return (
       <View style={{ ...styles.container, backgroundColor: this.state.identity==='wolf'? "#FEBEBE": '#ADE2FF' }}>
+        {this.state.redirect && <Redirect to={`/night/${this.state.lobbyId}/${this.state.username}`} />}
         <View>
           <Text style={styles.header}>You are a</Text>
           <Text style={{...styles.role, color: this.state.identity==='wolf'? "#B20000": '#002BC5'}}>{this.state.identity === "wolf"? "WereWolf" : "Villager"}</Text>
@@ -48,7 +52,7 @@ class IdentityScreen extends React.Component {
         <View style={styles.buttonContainer}>
           <Text style={styles.plaintext}>{this.state.identity === "wolf"? "Try to Kill All the Villagers": "Try to survive the Werewolf attacks."}</Text>
         </View>
-        <Link to={`/night/${this.state.lobbyId}/${this.state.username}`} ><Text>Continue</Text></Link>
+        <Button title="Continue" onPress={() => this.setState({redirect: true})}></Button>
       </View>
     )
   }

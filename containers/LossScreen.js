@@ -8,8 +8,8 @@ import styles from './Styles'
 
 const LossScreen = () => {
   return (
-    <View style={{ ...styles.container, backgroundColor: '#440000' }}>
-      <Text>Bitter Defeat</Text>
+    <View style={{ ...styles.container, backgroundColor: '#FFAAAA' , justifyContent: "center"}}>
+      <Text style={styles.plaintext}>Bitter Defeat</Text>
     </View>
   )
 }

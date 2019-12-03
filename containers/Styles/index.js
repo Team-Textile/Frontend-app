@@ -15,13 +15,15 @@ const styles = StyleSheet.create({
   },
   voteButtonContainer: {
     justifyContent: 'space-around',
-    height: '35%'
+    height: '35%',
+    width: "85%",
+    alignItems: "center"
   },
   voteContainer: {
+    width: '75%',
     backgroundColor: '#DDDDDD',
     padding: 5,
     flexDirection: 'row',
-    width: '75%',
     justifyContent: 'space-around',
     borderRadius: 5
   },
@@ -40,7 +42,8 @@ const styles = StyleSheet.create({
     color: '#002BC5',
     alignSelf: 'center',
     fontSize: 55,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+
   },
   plaintext: {
     fontSize: 25
@@ -64,13 +67,35 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   input: {
-    height: 30,
+    // height: 30,
     width: '85%',
     borderWidth: 2,
     borderColor: '#DDDDDD',
     borderRadius: 5,
     margin: 20,
+    padding: 10,
+    fontSize: 20,
+  },
+  playerContainer: {
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    margin: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: "center",
+    borderRadius: 5,
+    width: "75%",
+
+  },
+  playerText: {
+    fontSize: 20,
+    width: "100%",
+    fontWeight: 'bold',
+    alignItems: "center",
+    textAlign: "center",
+
   }
+  
 })
 
 export default styles
